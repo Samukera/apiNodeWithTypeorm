@@ -5,30 +5,58 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev --inspect  --ignore-watch node_modules src/server.ts",
-    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
+    "start": "node src/server.js",
+    "dev": "ts-node-dev --inspect  --ignore-watch node_modules src/server.ts --ignore __tests__",
+    "typeorm": " node --require ts-node/register ./node_modules/typeorm/cli.js",
+    "test": "jest"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.5",
+    "@types/jest": "^27.4.1",
+    "@types/jsonwebtoken": "^8.5.8",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
+    "babel-jest": "^27.5.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^27.5.1",
     "prettier": "^2.0.4",
+    "supertest": "^6.2.2",
+    "ts-jest": "^27.1.4",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"
   },
   "dependencies": {
     "@types/node": "^14.0.5",
+    "bcryptjs": "^2.4.3",
     "class-validator": "^0.13.2",
     "date-fns": "^2.28.0",
+    "dotenv": "^16.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.2.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.25"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

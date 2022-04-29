@@ -1,12 +1,10 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/class-name-casing */
 import { EntityRepository, getRepository, Repository } from 'typeorm';
-import { validate } from 'class-validator';
+import { validate, ValidationError } from 'class-validator';
 import City from '../models/City';
 
 @EntityRepository(City)
 class CityRepository extends Repository<City> {
-  async createCity(data: City): Promise<any> {
+  async createCity(data: City): Promise<City | ValidationError[]> {
     const repo = getRepository(City);
 
     const city = await repo.create(data);
@@ -21,46 +19,15 @@ class CityRepository extends Repository<City> {
     return errors;
   }
 
-  async findCity(name: string, state: number): Promise<any> {
+  async findCity(filter: any): Promise<City[]> {
     const repo = getRepository(City);
+    const options = filter
+      ? {
+          where: filter,
+        }
+      : undefined;
 
-    const res = await repo.find({
-      where: {
-        name,
-        state,
-      },
-    });
-
-    return res;
-  }
-
-  async findCityWithStateId(state: number): Promise<any> {
-    const repo = getRepository(City);
-
-    const res = await repo.find({
-      where: {
-        state,
-      },
-    });
-    return res;
-  }
-
-  async findCityWithName(name: string): Promise<any> {
-    const repo = getRepository(City);
-
-    const res = await repo.find({
-      where: {
-        name,
-      },
-    });
-
-    return res;
-  }
-
-  async findCities(): Promise<any> {
-    const repo = getRepository(City);
-
-    const res = await repo.find();
+    const res = await repo.find(options);
 
     return res;
   }

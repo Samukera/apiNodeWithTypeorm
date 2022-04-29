@@ -1,30 +1,16 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/class-name-casing */
+import City from '../models/City';
 import cityRepository from '../repositories/cityRepository';
+import { createFilterCity } from '../utils/functions/functions';
 
 export default class cityService {
-  static async createCity(data: any) {
+  static async createCity(data: City) {
     const result = await cityRepository.createCity(data);
     return result;
   }
 
-  static async findCity(payload: any) {
-    let result = null;
+  static async findCity(name: string, state: number) {
+    const filters = createFilterCity(name, state);
 
-    if (payload.name == null && payload.state == null) {
-
-      result = await cityRepository.findCities();
-    } else if (payload.name == null) {
-
-      result = await cityRepository.findCityWithStateId(payload.state);
-    } else if (payload.state == null) {
-
-      result = await cityRepository.findCityWithName(payload.name);
-    } else if (payload.name != null && payload.state != null) {
-
-      result = await cityRepository.findCity(payload.name, payload.state);
-    }
-
-    return result;
+    return cityRepository.findCity(filters);
   }
 }

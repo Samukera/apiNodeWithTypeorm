@@ -1,12 +1,9 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-param-reassign */
-/* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/class-name-casing */
-import { format } from 'date-fns';
+import Client from '../models/Client';
 import clientRepository from '../repositories/clientRepository';
+import { createFilterClient } from '../utils/functions/functions';
 
 export default class clientService {
-  static async createClient(data: any) {
+  static async createClient(data: Client) {
     const result = await clientRepository.createClient(data);
     return result;
   }
@@ -21,30 +18,11 @@ export default class clientService {
     return result;
   }
 
-  static async findClient(payload: any) {
-    let result = null;
+  static async findClient(clientId: number, name: string) {
+    const filters = createFilterClient(clientId, name);
 
-    if (payload.clientId == null && payload.name == null) {
+    const result = clientRepository.findClients(filters);
 
-      result = await clientRepository.findClients();
-    } else if (payload.name == null) {
-
-      result = await clientRepository.findClientWithClientId(payload.clientId);
-    } else if (payload.clientId == null) {
-
-      result = await clientRepository.findClientWithName(payload.name);
-    } else if (payload.clientId != null && payload.name != null) {
-
-      result = await clientRepository.findClient(payload.clientId, payload.name);
-    }
-    
-
-     
-     result = result.map(( client: any ) => {
-       client.bornIn = format(new Date(client.bornIn), 'dd-MM-yyyy');
-       return client;
-      })
-    
     return result;
   }
 }

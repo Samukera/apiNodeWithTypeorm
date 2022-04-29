@@ -16,7 +16,7 @@ To use this API, follow these steps:
   npm i or yarn i or yarn
 ```
 
-After this, you need configure the `ormconfig.json` with the data corresponding of the yours database postgres. Attention with the port, database and others parameters
+After this, you need configure the `ormconfig.json` with the data corresponding of the yours database postgres. Attention with the port, database and others parameters. And configure the `.env` with the example of the `.env.example` in this repo.
 
 The next step is to run the scripts to create and prepopulate the database. So:
 ```js

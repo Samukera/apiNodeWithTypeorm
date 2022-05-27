@@ -18,6 +18,7 @@ export default class Client {
   @Column({
     length: 100,
     unique: false,
+    nullable: false,
   })
   @MaxLength(100)
   @MinLength(3)
@@ -26,6 +27,7 @@ export default class Client {
   @Column({
     length: 1,
     unique: false,
+    nullable: false,
   })
   @MaxLength(1)
   @MinLength(1)

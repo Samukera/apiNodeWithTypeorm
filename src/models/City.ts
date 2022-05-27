@@ -17,6 +17,7 @@ export default class City {
   @Column({
     length: 100,
     unique: false,
+    nullable: false,
   })
   @MaxLength(100)
   @MinLength(3)

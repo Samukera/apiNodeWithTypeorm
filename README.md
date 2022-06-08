@@ -1,6 +1,6 @@
 
 # apiNodeTypeorm (Working...)
-
+# Attention: this repository is an object of study and environment for testing.
   This is the version 2.0 of the <https://github.com/Samukera/apiNode> repository.
 
   Technologies used: Nodejs, Typescript, Typeorm, PostgreSQL and others.
